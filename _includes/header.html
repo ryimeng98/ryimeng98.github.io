@@ -3,20 +3,19 @@
   <div id="avatar-container">
 
     <a href="/">
-      <img id="author-picture" src="{{ site.author.picture }}" class="img-rounded"/>
+      <img id="author-picture" src="{{ site.author.picture }}" class="img-rounded img-avatar"/>
     </a>
 
-    <p id="author-name">{{ site.author.name }}</p>
-
+    <p id="author-name" class="yimeng-name">{{ site.author.name }}</p>
     <p id="author-intro" class="visible-md-block visible-lg-block">{{ site.author.description }}</p>
 
     <nav>
 
       <ul id="nav" class="list-inline hidden-md hidden-lg">
-        <li><a href="/">Posts</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="{{ site.url }}/feed.xml" target="_blank">RSS</a></li>
-        <li><a href="//github.com/{{ site.github_username }}" target="_blank">GitHub</a></li>
+        <li><a class="route-link" href="/">Posts</a></li>
+        <li><a class="route-link" href="/about">About</a></li>
+        <li><a class="route-link" href="{{ site.url }}/feed.xml" target="_blank">RSS</a></li>
+        <li><a class="route-link" href="//github.com/{{ site.github_username }}" target="_blank">GitHub</a></li>
       </ul>
 
     </nav>
@@ -30,10 +29,10 @@
     <nav>
 
       <ul class="list-unstyled">
-        <li><a href="/">Posts</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="{{ site.url }}/feed.xml" target="_blank">RSS</a></li>
-        <li><a href="//github.com/{{ site.github_username }}" target="_blank">GitHub</a></li>
+        <li><a class="route-link" href="/">Posts</a></li>
+        <li><a class="route-link" href="/about">About</a></li>
+        <li><a class="route-link" href="{{ site.url }}/feed.xml" target="_blank">RSS</a></li>
+        <li><a class="route-link" href="//github.com/{{ site.github_username }}" target="_blank">GitHub</a></li>
       </ul>
 
     </nav>
@@ -51,3 +50,27 @@
   <!-- footer -->
 
 </header>
+
+<script>
+  console.log('gogogo')
+  var rythm = new Rythm();
+  var shake = document.getElementById('author-name');
+  <!-- shake.addEventListener('click', onShakeClick); -->
+  <!--  -->
+  rythm.addRythm('img-avatar', 'pulse', 0, 10, { min: 0.7, max: 1.1 })
+  rythm.addRythm('yimeng-name', 'kern', 0, 10, { min: 0, max: 5 })
+  rythm.addRythm('route-link', 'vanish', 0, 10)
+
+  shake.onclick = function(){
+    if (rythm.stopped === false) {
+      shake.innerHTML = 'RYimeng'
+      rythm.stop()
+      return
+    }
+    shake.innerHTML = 'Stop Shake'
+    // rythm.connectExternalAudioElement(audio)
+    rythm.setMusic('/assets/music/background.mp3')
+    rythm.setGain(0.1)
+    rythm.start()
+  }
+</script>
